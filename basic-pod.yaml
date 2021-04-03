@@ -6,12 +6,13 @@ metadata:
   labels:
     app: myapp
 spec:
+  serviceAccountName: my-serviceaccount
   containers:
     - name: myapp-container
       image: busybox
       command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
       ports:
-        - containerPort: 80 # used to expose this container to outside of pod 
+        - containerPort: 80 # expose port that container is listening on to the cluster (i.e makes this port accessible to entities outside the pod)
       resources:
         requests:
           memory: "64Mi" # 64 megabytes
