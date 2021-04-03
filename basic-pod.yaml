@@ -11,7 +11,14 @@ spec:
       image: busybox
       command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
       ports:
-        - containerPort: 80 # used to expose this container to outside of pod
+        - containerPort: 80 # used to expose this container to outside of pod 
+      resources:
+        requests:
+          memory: "64Mi" # 64 megabytes
+          cpu: "250m" # 250 milli cpus. a millicpu is 1/1000 of a cpu core i.e this is 25% of a cpu core
+        limits:
+          memory: "128Mi" # container will be killed if this is exceeded
+          cpu: "500m" # kill if container uses more than half a cpu core
   securityContext:
     runAsUser: 2001 # restrict to priviledges of this user
     fsGroup: 3001
