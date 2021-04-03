@@ -1,4 +1,4 @@
- apiVersion: v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: my-pod
@@ -20,5 +20,11 @@ spec:
           memory: "128Mi" # container will be killed if this is exceeded
           cpu: "500m" # kill if container uses more than half a cpu core
   securityContext:
+      env:
+        - name: MY_PASSWORD # create new environment variable visible to the container
+          valueFrom: # where to retrieve value for new environment var
+            secretKeyRef: # look for value in specific key of a secret
+              name: my-secret # name of secret
+              key: myKey # name of key within that secret
     runAsUser: 2001 # restrict to priviledges of this user
-    fsGroup: 3001
+    fsGroup: 3001 # restrict to priviledges of this group
