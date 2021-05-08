@@ -9,7 +9,7 @@ spec:
     ports:
     - containerPort: 80
     volumeMounts:
-    - name: my-volume
+    - name: my-volume # this name must match an existing volume name
       mountPath: /tmp/storage # the location inside the container where storage will be mounted
   volumes:
   - name: my-volume
