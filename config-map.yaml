@@ -1,3 +1,10 @@
 # A ConfigMap is a kubernetes object that stores configuration data in a key-value format.
 # This config data can then be used to configure software running in a container,
 # by referencing the ConfigMap in the Pod spec
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config-map
+data:
+  myKey: myValue
+  anotherKey: anotherValue
