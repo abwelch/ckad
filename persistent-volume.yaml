@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  my-pv
+spec:
+  storageClassName: local-storage # defines different categories of storage
+  capacity: # storage amount for the PV
+    storage: 1Gi
+  accessModes: # determines what read/write omdes can be used to mount the volume
+  - ReadWriteOne
+  hostPath: # Uses the node's local filesystem for storage. Allocates storage on the node where the Pod that is consuming the storage lives
+    path: "/mnt/data" # location on the node's disk
