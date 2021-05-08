@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-configmap-pod
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command : ['sh', '-c', "echo $(MY_VAR) && sleep 3600"]
+    env: # specifiy environment variables for this container
+    - name: MY_VAR # declares name of env var within the container
+      valueFrom: # tells cluster we are pulling this value in from somewhere else
+        configMapKeyRef: # reference specific key inside specific config map
+          name: my-config-map # name of existing config map
+          key: myKey # existing key within specified config map
