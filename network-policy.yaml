@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  my-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: secure-app
+  policyTypes:
+  - Ingress # if either of these is omitted, that gress type will be completely open
+  - Egress 
+  ingress:
+  - from: # refers to sources of traffic (traffic coming into the pod)
+    - podSelector:
+        matchLabels:
+          allow-access: "true" # this label is required on pod attempting to access this
+    ports:
+    - protocol: TCP
+      port: 80
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          allow-access: "true" # this label is required on pods that you are attempting to acccess w/ egress traffic
+    ports:
+    - protocol: TCP
+      port: 80
+
