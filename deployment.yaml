@@ -3,11 +3,11 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 3
-  selector:
+  replicas: 3 # number of replica pods (desired state)
+  selector: # determines pods that are included in this deployment spec
     matchLabels:
       app: nginx
-  template:
+  template: # pod template
     metadata:
       labels:
         app: nginx
